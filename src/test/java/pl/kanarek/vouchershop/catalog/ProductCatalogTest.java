@@ -10,7 +10,9 @@ public class ProductCatalogTest {
 
         string productId = catalog.registerProduct();
 
-        Assert.assertTrue(catalog.isExist(productId));
+        Assert.assertTrue(catalog.isExist(productId
+
+        ));
     }
 
 }
