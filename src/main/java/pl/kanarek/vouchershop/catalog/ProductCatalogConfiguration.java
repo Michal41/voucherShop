@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 public class ProductCatalogConfiguration {
 
     ProductCatalog myProductCatalog(){
-        return new ProductCatalog();
+        return new ProductCatalog(new HashMapProductStorage());
     }
 
     @Bean
     ProductCatalog myFictureCatalog(){
-        ProductCatalog catalog = new ProductCatalog();
+        ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
 
         var p1 = catalog.registerProduct();
         catalog.applyPrice(p1,BigDecimal.TEN);
