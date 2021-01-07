@@ -13,8 +13,13 @@ public class ProductCatalogConfiguration {
     }
 
     @Bean
-    ProductCatalog myFictureCatalog(){
-        ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
+    ProductStorage myHashMapProductStorage() {
+        return new HashMapProductStorage();
+    }
+
+    @Bean
+    ProductCatalog myFictureCatalog(ProductStorage productStorage){
+        ProductCatalog catalog = new ProductCatalog(productStorage);
 
         var p1 = catalog.registerProduct();
         catalog.applyPrice(p1,BigDecimal.TEN);

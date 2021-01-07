@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.UUID;
+import static org.assertj.core.api.Assertions.*;
 
 public class ListProductStorageTest {
     @Test
@@ -52,6 +53,11 @@ public class ListProductStorageTest {
         productStorage.save(product);
 
         Assert.assertTrue(productStorage.isExists(product.getId()));
+
+    }
+    @Test
+    public void testIt(){
+        assertThat("Ala ma kota").containsIgnoringCase("ala");
 
     }
 
