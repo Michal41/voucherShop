@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-package pl.kanarek.vouchershop;
-
-
-
-=======
 package pl.kanarek.vouchershop;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,4 +26,3 @@ public class App {
 }
 
 
->>>>>>> dependency_mamager
