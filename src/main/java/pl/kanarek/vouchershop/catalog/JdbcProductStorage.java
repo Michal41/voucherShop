@@ -1,8 +1,7 @@
 package pl.kanarek.vouchershop.catalog;
 
-import pl.kanarek.vouchershop.catalog.ProductStorage;
-
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcProductStorage implements ProductStorage {
 
@@ -17,7 +16,7 @@ public class JdbcProductStorage implements ProductStorage {
     }
 
     @Override
-    public Product load(String productId) {
+    public Optional<Product> load(String productId) {
         return null;
     }
 

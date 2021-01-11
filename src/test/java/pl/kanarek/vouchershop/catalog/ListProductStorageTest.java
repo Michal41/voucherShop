@@ -3,6 +3,7 @@ package pl.kanarek.vouchershop.catalog;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.*;
 
@@ -18,9 +19,6 @@ public class ListProductStorageTest {
 
     }
 
-    private Product thereIsProduct() {
-        return new Product(UUID.randomUUID());
-    }
 
     @Test
     public void itAllowToLoadProduct(){
@@ -30,7 +28,7 @@ public class ListProductStorageTest {
         product.setDescription("desc");
 
         productStorage.save(product);
-        Product loaded = productStorage.load(product.getId());
+        Product loaded = productStorage.load(product.getId()).get();
         Assert.assertTrue(loaded.getDescription().equals("desc"));
 
 
@@ -53,12 +51,23 @@ public class ListProductStorageTest {
         productStorage.save(product);
 
         Assert.assertTrue(productStorage.isExists(product.getId()));
-
+        assertThat(productStorage.isExists(UUID.randomUUID().toString())).isFalse();
     }
     @Test
     public void testIt(){
         assertThat("Ala ma kota").containsIgnoringCase("ala");
 
+    }
+
+    @Test(expected =  NoSuchElementException.class)
+    public void itShouldProtectFromDefensePrograming(){
+        ProductStorage productStorage = new ListProductStorage();
+        var loaded = productStorage.load(UUID.randomUUID().toString())
+                .orElseThrow(()-> new NoSuchElementException());
+    }
+
+    private Product thereIsProduct() {
+        return new Product(UUID.randomUUID());
     }
 
 }

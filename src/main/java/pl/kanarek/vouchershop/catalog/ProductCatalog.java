@@ -1,5 +1,7 @@
 package pl.kanarek.vouchershop.catalog;
 
+import pl.kanarek.vouchershop.catalog.exceptions.NoSuchProductException;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -25,17 +27,20 @@ public class ProductCatalog {
     }
 
     public Product load(String productId) {
-        return products.load(productId);
+        return products.load(productId).orElseThrow(() ->
+                new NoSuchProductException(String.format("there id no product with id %s",productId)));
     }
 
     public void updateDetails(String productId, String productDescription, String productPicture) {
-        Product loaded = products.load(productId);
+        Product loaded = products.load(productId).orElseThrow(() ->
+                new NoSuchProductException(String.format("there id no product with id %s",productId)));;
         loaded.setDescription(productDescription);
         loaded.setPicture(productPicture);
     }
 
     public void applyPrice(String productId, BigDecimal price) {
-        Product loaded = products.load(productId);
+        Product loaded = products.load(productId).orElseThrow(() ->
+                new NoSuchProductException(String.format("there id no product with id %s",productId)));
         loaded.setPrice(price);
 
 

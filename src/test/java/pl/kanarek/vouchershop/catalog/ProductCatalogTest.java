@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 public class ProductCatalogTest {
 

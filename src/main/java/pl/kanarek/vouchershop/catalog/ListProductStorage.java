@@ -1,13 +1,9 @@
 package pl.kanarek.vouchershop.catalog;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class ListProductStorage implements ProductStorage {
-    private final ArrayList<Product> products;
+    private final List<Product> products;
 
     public ListProductStorage() {
         this.products = new ArrayList<>();
@@ -20,17 +16,16 @@ public class ListProductStorage implements ProductStorage {
 
     @Override
     public boolean isExists(String productId) {
-        return ((products.stream().filter(product -> product.getId() == productId).toArray()).length>0);
+        return ((products.stream().filter(product -> product.getId().equals(productId)).findFirst().isPresent()));
     }
 
     @Override
-    public Product load(String productId) {
-        return products.stream().filter(p -> p.getId() == productId).collect(Collectors.toList()).get(0);
-
+    public Optional<Product> load(String productId) {
+        return products.stream().filter(p -> p.getId().equals(productId)).findFirst();
     }
 
     @Override
     public List<Product> allProducts() {
-        return products;
+        return Collections.unmodifiableList(products);
     }
 }
