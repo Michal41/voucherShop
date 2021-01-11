@@ -1,5 +1,6 @@
 package pl.kanarek.vouchershop.catalog;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,13 +16,13 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class JdbcPlaygroundTest {
 
     public static final String PRODUCT_ID = "a9820b50-6dd1-4c2c-90be-0795a9e973b1";
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -52,8 +53,8 @@ public class JdbcPlaygroundTest {
     @Test
     public void itAllowToAddProduct() {
         jdbcTemplate.execute("INSERT INTO `products_catalog__products` (`id`, `description`, `picture`, `price`) values " +
-                "('a9820b50-6dd1-4c2c-90be-0795a9e973b1', 'p1 description', 'p1 picture', 10.10)," +
-                "('a9820b50-6dd1-4c2c-90be-0795a9e973c1', 'p2 description', 'p2 picture', 20.20)" +
+                "('p1', 'p1 description', 'p1 picture', 10.10)," +
+                "('p2', 'p2 description', 'p2 picture', 20.20)" +
                 "; ");
 
         int productsCount = jdbcTemplate.queryForObject(
@@ -102,7 +103,7 @@ public class JdbcPlaygroundTest {
                 }
         );
 
-        assertThat(productList)
+        Assertions.assertThat(productList)
                 .hasSize(2)
                 .extracting(Product::getId)
                 .contains(PRODUCT_ID);
@@ -127,7 +128,7 @@ public class JdbcPlaygroundTest {
                 new ProductRowMapper()
         );
 
-        assertThat(productList)
+        Assertions.assertThat(productList)
                 .hasSize(1)
                 .extracting(Product::getId)
                 .contains(product.getId());

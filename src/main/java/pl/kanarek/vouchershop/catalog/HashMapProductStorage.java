@@ -1,6 +1,9 @@
 package pl.kanarek.vouchershop.catalog;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class HashMapProductStorage implements ProductStorage {
     private final HashMap<String, Product> products;
@@ -11,7 +14,7 @@ public class HashMapProductStorage implements ProductStorage {
 
     @Override
     public void save(Product newProduct) {
-        products.put(newProduct.getId(),newProduct);
+        products.put(newProduct.getId(), newProduct);
     }
 
     @Override
@@ -21,7 +24,7 @@ public class HashMapProductStorage implements ProductStorage {
 
     @Override
     public Optional<Product> load(String productId) {
-        return Optional.ofNullable( products.get(productId));
+        return Optional.ofNullable(products.get(productId));
     }
 
     @Override
