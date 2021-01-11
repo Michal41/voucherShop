@@ -3,6 +3,7 @@ package pl.kanarek.vouchershop.catalog;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -13,8 +14,13 @@ public class CatalogController {
         this.catalog = catalog;
     }
 
-    @GetMapping("/api/prodcuts")
-    public List<Product> allProducts(){
+    @GetMapping("/api/products")
+    public List<Product> allProducts() {
         return catalog.allPublished();
+    }
+
+    @GetMapping("/api/names")
+    public List<String> allNames() {
+        return Arrays.asList("Jakub", "Michal");
     }
 }
