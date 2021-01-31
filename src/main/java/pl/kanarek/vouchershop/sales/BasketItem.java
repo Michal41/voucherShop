@@ -1,12 +1,19 @@
 package pl.kanarek.vouchershop.sales;
 
 public class BasketItem {
+    private final String productId;
+    private final Integer quantitty;
+
+    public BasketItem(String productId, Integer quantitty) {
+        this.productId = productId;
+        this.quantitty = quantitty;
+    }
 
     public String getProductId() {
-        return null;
+        return productId;
     }
 
     public int getQuantity() {
-        return 999;
+        return quantitty;
     }
 }
