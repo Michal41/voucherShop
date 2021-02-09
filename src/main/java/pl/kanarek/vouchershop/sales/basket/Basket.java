@@ -1,8 +1,7 @@
-package pl.kanarek.vouchershop.sales;
+package pl.kanarek.vouchershop.sales.basket;
 
 import pl.kanarek.vouchershop.catalog.Product;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,19 +15,36 @@ public class Basket {
         this.productsQuantities = new HashMap<>();
     }
 
+    public static Basket empty() {
+        return new Basket();
+    }
+
     public boolean isEmpty() {
         return products.isEmpty();
     }
 
     public void add(Product product) {
-        products.put(product.getId(), product);
-        if (productsQuantities.containsKey(product.getId())){
-            productsQuantities.put(product.getId(),
-                    productsQuantities.get(product.getId())+ 1);
+        if (isInBasket(product)){
+            IncreaseProductQuantity(product);
         }else{
-            productsQuantities.put(product.getId(), 1);
+            putProductToBasket(product);
+
         }
 
+    }
+
+    private void putProductToBasket(Product product) {
+        productsQuantities.put(product.getId(),1);
+        products.put(product.getId(), product);
+    }
+
+    private void IncreaseProductQuantity(Product product) {
+        productsQuantities.put(product.getId(),
+                productsQuantities.get(product.getId())+1);
+    }
+
+    private boolean isInBasket(Product product) {
+        return productsQuantities.containsKey(product.getId());
     }
 
     public int getProductQuantity() {

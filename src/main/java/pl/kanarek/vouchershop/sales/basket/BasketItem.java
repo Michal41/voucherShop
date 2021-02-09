@@ -1,4 +1,4 @@
-package pl.kanarek.vouchershop.sales;
+package pl.kanarek.vouchershop.sales.basket;
 
 public class BasketItem {
     private final String productId;

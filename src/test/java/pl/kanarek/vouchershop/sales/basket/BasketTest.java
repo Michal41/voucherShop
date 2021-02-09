@@ -1,8 +1,10 @@
-package pl.kanarek.vouchershop.sales;
+package pl.kanarek.vouchershop.sales.basket;
 
 
 import org.junit.Test;
 import pl.kanarek.vouchershop.catalog.Product;
+import pl.kanarek.vouchershop.sales.basket.Basket;
+import pl.kanarek.vouchershop.sales.basket.BasketItem;
 
 import java.util.UUID;
 
